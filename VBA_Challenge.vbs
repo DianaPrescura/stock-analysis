@@ -1,10 +1,43 @@
-# Green stocks Analysis
-Performing analysis on Green Stocks data using Visual Basic for Applications (VBA)
-## Overview of Project
-     The main purpose of the project is to analyze several green energy stocks from different years (2017 and 2018), in order to help Steve determine if his parents should  invest all their money into DAQO New Energy Corporation or if their funds could be diversified. 
+Sub AllStocksAnalysisRefactored()
+    Dim startTime As Single
+    Dim endTime  As Single
 
-## Analysis and Challenges
+    yearValue = InputBox("What year would you like to run the analysis on?")
 
+    startTime = Timer
+    
+    'Format the output sheet on All Stocks Analysis worksheet
+    Worksheets("All Stocks Analysis").Activate
+    
+    Range("A1").Value = "All Stocks (" + yearValue + ")"
+    
+    'Create a header row
+    Cells(3, 1).Value = "Ticker"
+    Cells(3, 2).Value = "Total Daily Volume"
+    Cells(3, 3).Value = "Return"
+
+    'Initialize array of all tickers
+    Dim tickers(12) As String
+    
+    tickers(0) = "AY"
+    tickers(1) = "CSIQ"
+    tickers(2) = "DQ"
+    tickers(3) = "ENPH"
+    tickers(4) = "FSLR"
+    tickers(5) = "HASI"
+    tickers(6) = "JKS"
+    tickers(7) = "RUN"
+    tickers(8) = "SEDG"
+    tickers(9) = "SPWR"
+    tickers(10) = "TERP"
+    tickers(11) = "VSLR"
+    
+    'Activate data worksheet
+    Worksheets(yearValue).Activate
+    
+    'Get the number of rows to loop over
+    RowCount = Cells(Rows.Count, "A").End(xlUp).Row
+    
     '1a) Create a ticker Index
     Dim tickerIndex as Single
     tickerIndex = 0
@@ -88,17 +121,3 @@ Performing analysis on Green Stocks data using Visual Basic for Applications (VB
     MsgBox "This code ran in " & (endTime - startTime) & " seconds for the year " & (yearValue)
 
 End Sub
-
-
-## Results
-
--   We could state that the green stocks we analyzed performed much better in 2017 than in 2018 regarding the yearly return. It was registered one one hand that the two stocks ENPH and RUN stock had positive returns both years. On the other hand we have noticed that the two stocks increased their daily trading volume. 
- -  Also, we could note that almost all stocks in 2017 had a positive return, except the stock ticker "TERP"
- -  The DQ stock that Steve's parents invested in, had a significant loss in 2018.
- -  Regarding refactoring the script, while doing that it  significantly improved the run time 
-
-### Summary
-
-
-Advantages or Disadvantages of refactoring code? 
-    The main purpose of refactoring code is to render the code efficient which will allow it to run faster, be updated or edited in a quicker manner, and can be duplicated or reused with relative ease.  As apposed to it, the big downsize, the refactoring code could get harder to read and implicit it can get time consuming.
